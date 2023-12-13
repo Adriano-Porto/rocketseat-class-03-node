@@ -44,6 +44,7 @@ export class InMemoryGymsRepository implements GymsRepository {
 				latitute:params.latitude, longitude: params.longitude
 			},
 			{ latitute: item.latitude.toNumber(), longitude: item.longitude.toNumber()})
+			return distance < 10
 		})
 	}
 }
