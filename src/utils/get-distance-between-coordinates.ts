@@ -29,8 +29,4 @@ export function getDistanceBetweenCoordinates(
 	dist = dist * 60 * 1.1515 * 1.609344
 
 	return dist
-    
-
-
-
 }
