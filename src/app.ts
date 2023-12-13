@@ -2,6 +2,7 @@ import fastify from 'fastify'
 import { appRoutes } from './http/controller/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
+import fastifyJwt from '@fastify/jwt'
 
 // MVC / Model | View | Controller
 // RepostiroyPattern | Abstraction to access the database
@@ -12,6 +13,10 @@ import { env } from './env'
 // Refactor -> Refatorar
 
 export const app = fastify()
+
+app.register(fastifyJwt, {
+	secret: env.JWT_SECRET
+})
 
 app.register(appRoutes)
 
