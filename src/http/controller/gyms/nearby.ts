@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 
-export async function create(req: FastifyRequest, reply: FastifyReply){
+export async function nearby(req: FastifyRequest, reply: FastifyReply){
 	const fetchNearbyGymsQuerySchema = z.object({
 		latitude: z.number().refine(val => {
 			return Math.abs(val) <= 90

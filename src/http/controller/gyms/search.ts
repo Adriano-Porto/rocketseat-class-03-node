@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 
-export async function create(req: FastifyRequest, reply: FastifyReply){
+export async function search(req: FastifyRequest, reply: FastifyReply){
 	const createGymSchema = z.object({
 		q: z.string(),
 		page: z.coerce.number().min(1).default(1)
