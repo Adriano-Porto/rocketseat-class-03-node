@@ -1,8 +1,9 @@
 import fastify from 'fastify'
-import { appRoutes } from './http/controller/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
+import { usersRoutes } from './http/controller/users/routes'
+import { gymsRoutes } from './http/controller/gyms/routes'
 
 // MVC / Model | View | Controller
 // RepostiroyPattern | Abstraction to access the database
@@ -18,7 +19,9 @@ app.register(fastifyJwt, {
 	secret: env.JWT_SECRET
 })
 
-app.register(appRoutes)
+app.register(usersRoutes)
+app.register(gymsRoutes)
+
 
 app.setErrorHandler((error, request, reply) => {
 	if (error instanceof ZodError) {
