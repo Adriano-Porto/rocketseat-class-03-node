@@ -4,6 +4,7 @@ import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
 import { usersRoutes } from './http/controller/users/routes'
 import { gymsRoutes } from './http/controller/gyms/routes'
+import { checkinRoutes } from './http/controller/check-ins/routes'
 
 // MVC / Model | View | Controller
 // RepostiroyPattern | Abstraction to access the database
@@ -19,13 +20,9 @@ app.register(fastifyJwt, {
 	secret: env.JWT_SECRET
 })
 
-app.register(usersRoutes)
-app.register(gymsRoutes)
-
-
 app.setErrorHandler((error, request, reply) => {
 	if (error instanceof ZodError) {
-		return reply.status(400).send({message: 'Validation Error', issues: error.format()})
+		return reply.status(400).send({message: 'Validation Error', issues: error})
 	}
 
 	if(env.NODE_ENV !== 'prod') {
@@ -36,3 +33,7 @@ app.setErrorHandler((error, request, reply) => {
 
 	return reply.status(500).send({message: 'Internal Server Error.'})
 })
+
+app.register(usersRoutes)
+app.register(gymsRoutes)
+app.register(checkinRoutes)
